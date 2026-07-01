@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jasny Umysł · Barbara Anna Zielonka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Source+Serif+4:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F4EEDF;
+  --paper-deep:#EAE1CB;
+  --ink:#2B2316;
+  --ink-soft:#5B5240;
+  --navy:#1C3144;
+  --navy-deep:#10212F;
+  --gold:#C2933F;
+  --gold-bright:#D9AE5C;
+  --terracotta:#B5552E;
+  --sage:#4F7359;
+  --sage-deep:#365240;
+  --line:#D8CCAA;
+  --card:#FFFCF4;
+  --radius:18px;
+  --shadow: 0 10px 30px -12px rgba(28,49,68,0.25);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth; overflow-x:hidden;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:19px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  overflow-wrap:break-word;
+  word-wrap:break-word;
+}
+::selection{background:var(--gold-bright); color:var(--navy-deep);}
+
+a{color:var(--terracotta);}
+h1,h2,h3,h4{font-family:'Fraunces', Georgia, serif; color:var(--navy-deep); margin:0 0 .4em 0; letter-spacing:-0.01em;}
+.eyebrow{
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--terracotta);
+}
+.btn-reset{font-family:inherit;}
+
+/* ============ TOP BAR ============ */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:var(--navy-deep);
+  color:var(--paper);
+  border-bottom:3px solid var(--gold);
+}
+.topbar-inner{
+  max-width:1180px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 24px;
+  gap:20px;
+}
+.brand{
+  display:flex; align-items:center; gap:12px;
+  font-family:'Fraunces', serif;
+  font-size:24px; font-weight:600; color:#fff;
+}
+.brand .seal{
+  width:42px; height:42px; border-radius:50%;
+  background:radial-gradient(circle at 32% 28%, var(--gold-bright), var(--gold) 60%, #8a6a26 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Fraunces',serif; font-weight:700; color:var(--navy-deep); font-size:19px;
+  box-shadow: inset 0 -3px 6px rgba(0,0,0,0.25), 0 2px 6px rgba(0,0,0,.4);
+  flex-shrink:0;
+}
+.toolbar-controls{display:flex; gap:10px; align-items:center;}
+.font-btn{
+  font-family:'Inter',sans-serif; font-weight:700;
+  background:transparent; color:var(--paper);
+  border:1.5px solid rgba(244,238,223,.4); border-radius:10px;
+  width:42px; height:42px; cursor:pointer; font-size:15px;
+  transition:.15s;
+}
+.font-btn:hover, .font-btn:focus-visible{background:rgba(244,238,223,.12); border-color:var(--gold-bright);}
+
+/* ============ NAV TABS (the "almanac dividers") ============ */
+.nav-wrap{ background:var(--navy); border-bottom:1px solid rgba(244,238,223,.15);}
+.tabs{
+  max-width:1180px; margin:0 auto;
+  display:flex; overflow-x:auto;
+  scrollbar-width:thin;
+  padding:0 12px;
+}
+.tab{
+  font-family:'Inter',sans-serif;
+  flex:0 0 auto;
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  background:none; border:none; cursor:pointer;
+  color:rgba(244,238,223,.6);
+  padding:14px 18px 12px;
+  font-size:13px; font-weight:600;
+  letter-spacing:.03em;
+  border-bottom:4px solid transparent;
+  white-space:nowrap;
+  transition:.15s;
+}
+.tab .ticon{font-size:22px; line-height:1;}
+.tab:hover{color:var(--paper);}
+.tab[aria-selected="true"]{
+  color:#fff; border-bottom-color:var(--gold-bright);
+}
+.tab:focus-visible{outline:2px solid var(--gold-bright); outline-offset:2px;}
+
+/* ============ HERO / WELCOME ============ */
+.hero{
+  max-width:980px; margin:0 auto; padding:64px 28px 40px;
+  text-align:left;
+}
+.hero .eyebrow{display:block; margin-bottom:14px;}
+.hero h1{font-size:clamp(34px,5vw,54px); line-height:1.08; max-width:14ch;}
+.hero p.lede{font-size:21px; color:var(--ink-soft); max-width:60ch; margin-top:18px;}
+.hero-divider{
+  height:2px; max-width:980px; margin:40px auto 0;
+  background:repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 18px);
+}
+
+/* category grid on welcome */
+.cat-grid{
+  max-width:1180px; margin:48px auto 80px; padding:0 28px;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:22px;
+}
+.cat-card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:26px 24px; cursor:pointer; text-align:left;
+  box-shadow:var(--shadow);
+  transition:transform .18s ease, box-shadow .18s ease;
+  font-family:inherit;
+}
+.cat-card:hover, .cat-card:focus-visible{ transform:translateY(-4px); box-shadow:0 18px 36px -14px rgba(28,49,68,.35);}
+.cat-card .stamp{
+  width:54px; height:54px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:26px; margin-bottom:16px;
+  border:2px solid var(--gold);
+}
+.cat-card h3{font-size:21px; margin-bottom:8px;}
+.cat-card p{font-size:16px; color:var(--ink-soft); margin:0; line-height:1.55;}
+
+/* ============ SECTIONS / LESSON CONTENT ============ */
+.section{ display:none; }
+.section.active{ display:block; }
+
+.section-header{
+  background:var(--navy-deep);
+  color:var(--paper);
+  padding:54px 28px 60px;
+  position:relative;
+  overflow:hidden;
+}
+.section-header::after{
+  content:""; position:absolute; right:-60px; top:-60px; width:240px; height:240px;
+  border-radius:50%; border:50px solid rgba(201,154,60,.12);
+}
+.section-header-inner{max-width:900px; margin:0 auto; position:relative;}
+.section-header .stamp-lg{
+  width:64px; height:64px; border-radius:50%;
+  background:radial-gradient(circle at 32% 28%, var(--gold-bright), var(--gold) 65%, #8a6a26 100%);
+  display:flex; align-items:center; justify-content:center; font-size:30px;
+  margin-bottom:20px;
+  box-shadow: inset 0 -3px 6px rgba(0,0,0,0.25);
+}
+.section-header h2{color:#fff; font-size:clamp(30px,4.4vw,46px); max-width:16ch;}
+.section-header .deck{font-size:19px; color:#D9CFAF; max-width:60ch; margin-top:14px;}
+
+.content{max-width:780px; margin:0 auto; padding:50px 28px 100px;}
+
+.lesson{ margin-bottom:64px; padding-bottom:56px; border-bottom:2px dashed var(--line); }
+.lesson:last-child{border-bottom:none;}
+.lesson-tag{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--paper-deep); border:1px solid var(--line); border-radius:100px;
+  padding:6px 16px; font-family:'Inter',sans-serif; font-size:13px; font-weight:700;
+  color:var(--sage-deep); letter-spacing:.05em; text-transform:uppercase; margin-bottom:18px;
+}
+.lesson h3.lesson-title{font-size:clamp(26px,3.4vw,34px); line-height:1.18; margin-bottom:8px;}
+.lesson .subhead{font-size:18px; font-weight:600; color:var(--ink-soft); font-family:'Inter',sans-serif; margin-bottom:28px;}
+
+.lesson h4{
+  font-size:24px; margin-top:42px; margin-bottom:14px;
+  display:flex; align-items:center; gap:10px;
+}
+.lesson h4 .em{font-size:26px;}
+.lesson p{margin:0 0 18px;}
+.lesson ul, .lesson ol{padding-left:1.3em; margin:0 0 18px;}
+.lesson li{margin-bottom:10px;}
+.lesson strong{color:var(--navy-deep);}
+
+/* callout / tip box */
+.tip{
+  background:var(--card); border-left:6px solid var(--sage);
+  border-radius:0 14px 14px 0; padding:20px 24px; margin:24px 0;
+  box-shadow:var(--shadow);
+}
+.tip-label{font-family:'Inter',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--sage-deep); margin-bottom:6px; display:block;}
+.tip.warn{border-left-color:var(--terracotta);}
+.tip.warn .tip-label{color:var(--terracotta);}
+.tip.gold{border-left-color:var(--gold);}
+.tip.gold .tip-label{color:#8a6a26;}
+
+/* fact / stat callout */
+.fact-box{
+  background:var(--navy); color:var(--paper);
+  border-radius:var(--radius); padding:26px 28px; margin:26px 0;
+  box-shadow:var(--shadow);
+}
+.fact-box .tip-label{color:var(--gold-bright);}
+.fact-box p{color:#EDE6CF; margin:0;}
+.fact-box strong{color:#fff;}
+
+/* tables */
+.table-wrap{overflow-x:auto; margin:26px 0; border-radius:14px; box-shadow:var(--shadow);}
+table{width:100%; border-collapse:collapse; background:var(--card); font-size:17px;}
+th,td{ text-align:left; padding:14px 16px; border-bottom:1px solid var(--line); vertical-align:top;}
+th{ background:var(--navy); color:#fff; font-family:'Inter',sans-serif; font-size:14px; letter-spacing:.03em; text-transform:uppercase; font-weight:700;}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:rgba(201,154,60,.06);}
+
+/* action step / numbered list block */
+.steps{ counter-reset:step; list-style:none; padding:0; margin:24px 0;}
+.steps li{
+  counter-increment:step; position:relative; padding-left:54px; margin-bottom:20px;
+}
+.steps li::before{
+  content:counter(step); position:absolute; left:0; top:-2px;
+  width:36px; height:36px; border-radius:50%;
+  background:var(--gold); color:var(--navy-deep); font-family:'Inter',sans-serif; font-weight:700;
+  display:flex; align-items:center; justify-content:center; font-size:16px;
+}
+
+/* checklist (interactive) */
+.checklist{ list-style:none; padding:0; margin:24px 0; display:flex; flex-direction:column; gap:10px;}
+.checklist li{
+  background:var(--card); border:1.5px solid var(--line); border-radius:12px;
+  padding:14px 18px; display:flex; align-items:flex-start; gap:14px; cursor:pointer;
+  font-size:17px; transition:.15s;
+}
+.checklist li:hover{border-color:var(--gold);}
+.checklist input{ width:22px; height:22px; flex-shrink:0; margin-top:2px; accent-color: var(--sage-deep);}
+.checklist li.checked{ background: #EEF3EA; border-color:var(--sage); }
+.checklist li.checked span{ text-decoration:line-through; color:var(--ink-soft);}
+
+/* quiz */
+.quiz-card{
+  background:var(--card); border:1.5px solid var(--line); border-radius:var(--radius);
+  padding:26px; margin:24px 0; box-shadow:var(--shadow);
+}
+.quiz-q{font-family:'Inter',sans-serif; font-weight:700; margin-bottom:14px; font-size:17px;}
+.quiz-options{display:flex; gap:12px; flex-wrap:wrap;}
+.quiz-options button{
+  font-family:'Inter',sans-serif; font-weight:600; font-size:16px;
+  padding:12px 20px; border-radius:100px; border:2px solid var(--line);
+  background:#fff; cursor:pointer; transition:.15s;
+}
+.quiz-options button:hover{border-color:var(--gold);}
+.quiz-options button.correct{background:var(--sage); border-color:var(--sage-deep); color:#fff;}
+.quiz-options button.wrong{background:#E6C1B0; border-color:var(--terracotta); color:#5b2510;}
+.quiz-feedback{margin-top:14px; font-size:16px; font-weight:600; min-height:1.4em;}
+
+/* slang dictionary cards */
+.slang-grid{display:grid; grid-template-columns:1fr; gap:16px; margin:24px 0;}
+.slang-card{
+  background:var(--card); border:1.5px solid var(--line); border-radius:14px; padding:20px 22px;
+  display:grid; grid-template-columns:auto 1fr; gap:4px 18px; box-shadow:var(--shadow);
+}
+.slang-word{ grid-column:1; font-family:'Fraunces',serif; font-weight:600; font-size:22px; color:var(--terracotta); align-self:center;}
+.slang-mean{grid-column:2; font-size:16px; color:var(--ink-soft); align-self:center;}
+.slang-ex{grid-column:1/-1; margin-top:8px; font-size:16px; font-style:italic; background:var(--paper-deep); padding:10px 14px; border-radius:8px;}
+
+/* sources */
+.sources{
+  margin-top:50px; padding-top:30px; border-top:3px solid var(--line);
+}
+.sources h4{font-size:18px; color:var(--ink-soft); font-family:'Inter',sans-serif; text-transform:uppercase; letter-spacing:.05em; font-weight:700;}
+.sources p{font-size:15.5px; color:var(--ink-soft);}
+
+/* daily challenge box for umysł lesson */
+.challenge-box{
+  background: linear-gradient(135deg, var(--sage-deep), var(--sage));
+  color:#fff; border-radius:var(--radius); padding:30px 28px; margin:30px 0;
+  box-shadow:var(--shadow);
+}
+.challenge-box .tip-label{color:#EFE7C9;}
+.challenge-box p{color:#EAF1E6; margin:0;}
+.challenge-box strong{color:#fff;}
+.challenge-box .pick-list{margin-top:16px; display:flex; flex-direction:column; gap:10px;}
+.challenge-box .pick-list button{
+  text-align:left; font-family:'Source Serif 4',serif; font-size:16.5px;
+  background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.3); color:#fff;
+  border-radius:10px; padding:14px 18px; cursor:pointer; transition:.15s;
+}
+.challenge-box .pick-list button:hover{background:rgba(255,255,255,.22);}
+.challenge-box .pick-list button.picked{background:#fff; color:var(--sage-deep); font-weight:700;}
+
+/* back to top */
+.back-top{
+  display:block; max-width:780px; margin:0 auto 60px; text-align:center;
+}
+.back-top button{
+  font-family:'Inter',sans-serif; font-weight:700; font-size:14px; letter-spacing:.05em; text-transform:uppercase;
+  background:none; border:2px solid var(--navy); color:var(--navy); padding:12px 26px; border-radius:100px; cursor:pointer;
+}
+.back-top button:hover{ background:var(--navy); color:#fff;}
+
+footer{ text-align:center; padding:34px 20px 50px; font-family:'Inter',sans-serif; font-size:14px; color:var(--ink-soft);}
+
+@media (max-width:640px){
+  body{font-size:18px;}
+  .topbar-inner{padding:10px 14px; gap:10px;}
+  .brand{font-size:17px; gap:8px;}
+  .brand .seal{width:34px;height:34px;font-size:15px;}
+  .font-btn{width:38px; height:38px; font-size:14px;}
+  .hero{padding:40px 18px 26px;}
+  .hero p.lede{font-size:18px;}
+  .content{padding:32px 16px 60px;}
+  .section-header{padding:34px 18px 40px;}
+  .section-header .deck{font-size:17px;}
+  .tab{padding:12px 12px 10px; font-size:12px;}
+  .tab .ticon{font-size:19px;}
+  .cat-grid{gap:16px; margin:36px auto 56px;}
+  .slang-card{grid-template-columns:1fr;}
+  .slang-mean{grid-column:1;}
+  table{font-size:15px;}
+  th,td{padding:11px 12px;}
+  .fact-box, .challenge-box, .quiz-card, .tip{padding:18px 18px;}
+}
+
+
+body.fs-small{font-size:17px;}
+.fontsize-2 body, body.fs-2{font-size:22px;}
+body.fs-3{font-size:25px;}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{transition:none !important;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="seal">JU</span> Jasny Umysł</div>
+    <div class="toolbar-controls">
+      <button class="font-btn" id="fontDown" title="Zmniejsz tekst" aria-label="Zmniejsz tekst">A−</button>
+      <button class="font-btn" id="fontUp" title="Powiększ tekst" aria-label="Powiększ tekst">A+</button>
+    </div>
+  </div>
+  <div class="nav-wrap">
+    <nav class="tabs" id="tabs" role="tablist" aria-label="Kategorie">
+      <button class="tab" role="tab" data-target="welcome" aria-selected="true"><span class="ticon">🏠</span>Start</button>
+      <button class="tab" role="tab" data-target="umysl" aria-selected="false"><span class="ticon">🧠</span>Umysł</button>
+      <button class="tab" role="tab" data-target="dom" aria-selected="false"><span class="ticon">🌿</span>Dom</button>
+      <button class="tab" role="tab" data-target="dieta" aria-selected="false"><span class="ticon">🥦</span>Dieta</button>
+      <button class="tab" role="tab" data-target="relacje" aria-selected="false"><span class="ticon">🤝</span>Relacje</button>
+      <button class="tab" role="tab" data-target="ai" aria-selected="false"><span class="ticon">🤖</span>Sztuczna Inteligencja</button>
+      <button class="tab" role="tab" data-target="cyfrowy" aria-selected="false"><span class="ticon">📱</span>Cyfrowy świat</button>
+      <button class="tab" role="tab" data-target="slownik" aria-selected="false"><span class="ticon">💬</span>Słownik</button>
+      <button class="tab" role="tab" data-target="ruch" aria-selected="false"><span class="ticon">🚶</span>Ruch</button>
+      <button class="tab" role="tab" data-target="strefy" aria-selected="false"><span class="ticon">🔵</span>Niebieskie Strefy</button>
+    </nav>
+  </div>
+</div>
+
+<!-- ====================== WELCOME ====================== -->
+<section class="section active" id="welcome">
+  <div class="hero">
+    <span class="eyebrow">Witamy na pokładzie</span>
+    <h1>Wiek to tylko cyfra. Twój rozwój trwa nadal.</h1>
+    <p class="lede">Świat pędzi dziś do przodu jak szalony — nowe technologie, zmieniający się język, nowoczesne tworzywa w naszych domach. Przez lata wmawiano nam, że z wiekiem człowiek przestaje się rozwijać. To jeden z największych mitów w historii.</p>
+    <p class="lede">Współczesna nauka udowadnia, że dojrzały wiek to czas niesamowitych możliwości dla ciała i umysłu. Tu znajdziesz twarde, sprawdzone naukowo fakty — podane prosto, bez żargonu, za to z humorem i konkretną wskazówką na każdy dzień.</p>
+  </div>
+  <div class="hero-divider"></div>
+
+  <div class="cat-grid">
+    <button class="cat-card" data-target="umysl">
+      <div class="stamp" style="background:#EAF1E6;">🧠</div>
+      <h3>Umysł</h3>
+      <p>Mózg, który wciąż rośnie. Poznaj neuroplastyczność i codzienne mikro-wyzwania, które rzeźbią pamięć na nowo.</p>
+    </button>
+    <button class="cat-card" data-target="dom">
+      <div class="stamp" style="background:#EAF1E6;">🌿</div>
+      <h3>Świadomy i bezpieczny dom</h3>
+      <p>Jak wygonić mikroplastik z kuchni i urządzić przestrzeń, która chroni przed upadkiem.</p>
+    </button>
+    <button class="cat-card" data-target="dieta">
+      <div class="stamp" style="background:#FBF1DD;">🥦</div>
+      <h3>Dieta dla długowieczności</h3>
+      <p>Dieta MIND chroniąca pamięć oraz sekret nawodnienia, o którym mówi się za rzadko.</p>
+    </button>
+    <button class="cat-card" data-target="relacje">
+      <div class="stamp" style="background:#FDE8E8;">🤝</div>
+      <h3>Relacje</h3>
+      <p>Jak mądrze budować sieć wsparcia, stawiać granice i rozmawiać tak, by być usłyszanym.</p>
+    </button>
+    <button class="cat-card" data-target="ai">
+      <div class="stamp" style="background:#EEE6F8;">🤖</div>
+      <h3>Sztuczna Inteligencja</h3>
+      <p>Twój nowy, cierpliwy asystent — jak korzystać z AI w codziennym życiu, bezpiecznie i z pożytkiem.</p>
+    </button>
+    <button class="cat-card" data-target="cyfrowy">
+      <div class="stamp" style="background:#EFE7F5;">📱</div>
+      <h3>Cyfrowy świat</h3>
+      <p>Smartfon bez bólu karku i bez stresu — oraz jak bezpiecznie rozpoznać oszustów telefonicznych.</p>
+    </button>
+    <button class="cat-card" data-target="slownik">
+      <div class="stamp" style="background:#FBE7DD;">💬</div>
+      <h3>Słownik młodzieżowy</h3>
+      <p>Przetłumaczymy język wnuków i młodzieży — to świetny, darmowy trening dla mózgu i most do rozmowy.</p>
+    </button>
+    <button class="cat-card" data-target="ruch">
+      <div class="stamp" style="background:#EAF1E6;">🚶</div>
+      <h3>Ruch to lek</h3>
+      <p>Bezpieczne aktywności dopasowane do Twoich sił — dla stawów, kości, serca i pamięci.</p>
+    </button>
+    <button class="cat-card" data-target="strefy">
+      <div class="stamp" style="background:#E3EEF6;">🔵</div>
+      <h3>Niebieskie Strefy</h3>
+      <p>Nawyki najzdrowszych stulatków świata — i jak przenieść je do polskiego domu.</p>
+    </button>
+  </div>
+</section>
+
+<!-- ====================== UMYSŁ ====================== -->
+<section class="section" id="umysl">
+  <div class="section-header">
+    <div class="section-header-inner">
+      <div class="stamp-lg">🧠</div>
+      <span class="eyebrow" style="color:var(--gold-bright);">Kategoria: Umysł</span>
+      <h2>Mózg, który wciąż rośnie</h2>
+      <p class="deck">Dwie lekcje o tym, jak codzienna nowość i właściwe paliwo dosłownie odmładzają Twój umysł.</p>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <article class="lesson">
+      <span class="lesson-tag">Lekcja 1</span>
+      <h3 class="lesson-title">Twój mózg potrafi rzeźbić się na nowo!</h3>
+      <p class="subhead">O neuroplastyczności, czyli supermocy, o której nie wiedzieli Twoi dziadkowie</p>
+
+      <p>Często słyszymy stare powiedzenie: <em>„Starego psa nie nauczysz nowych sztuczek”</em>. Jeśli kiedykolwiek pomyślałaś/eś w ten sposób o swoim umyśle — mamy dla Ciebie fantastyczną wiadomość. Nauka udowodniła, że to jeden z największych mitów w historii!</p>
+      <p>Twój mózg nie jest betonową rzeźbą, która zastyga na zawsze. To raczej plastelina, która zmienia kształt pod wpływem tego, co robisz i jak myślisz. Ta niesamowita supermoc nazywa się <strong>neuroplastycznością</strong>.</p>
+
+      <h4><span class="em">🌲</span> Wyobraź sobie gęsty las…</h4>
+      <p>Aby zrozumieć, jak działa Twój umysł, wyobraź sobie, że Twoje codzienne nawyki to wydeptane, szerokie ścieżki w gęstym lesie.</p>
+      <ul>
+        <li>Kiedy rano parzysz kawę w ten sam sposób, idziesz dobrze znaną, bezpieczną autostradą. Mózg nie musi przy tym w ogóle myśleć — działa automatycznie.</li>
+        <li>Kiedy jednak postanawiasz zrobić coś zupełnie nowego, zaczynasz przedzierać się przez chaszcze. Musisz uważać na gałęzie, planować każdy krok. Na początku jest trudno i czujesz wysiłek.</li>
+      </ul>
+      <p>Ale wiesz, co dzieje się w Twojej głowie podczas tego wysiłku? Twoje komórki nerwowe właśnie budują fizycznie nowe mosty i połączenia! Z każdym kolejnym dniem nowa ścieżka staje się wygodną drogą, a Twój mózg staje się większy i sprawniejszy.</p>
+
+      <div class="tip warn">
+        <span class="tip-label">🧩 Pułapka codziennych krzyżówek</span>
+        Wielu z nas uważa, że codzienne rozwiązywanie tej samej krzyżówki to idealny trening pamięci. Naukowcy z Harvardu wyjaśniają: jeśli robisz coś od dwudziestu lat, mózg robi to już „z zamkniętymi oczami” — korzysta ze starych autostrad, zamiast budować nowe.
+      </div>
+
+      <div class="fact-box">
+        <span class="tip-label">Złota zasada neuroplastyczności</span>
+        <p>Mózg rozwija się tylko wtedy, gdy stawiasz przed nim nowe wyzwania i zmuszasz go do lekkiego wysiłku. Nowość to paliwo dla Twojej pamięci!</p>
+      </div>
+
+      <h4><span class="em">🏋️</span> Twój dzisiejszy mini-trening</h4>
+      <p>Nie musisz od razu studiować fizyki kwantowej. Wybierz jedno zadanie z listy poniżej i zrób je właśnie dziś:</p>
+
+      <div class="challenge-box">
+        <span class="tip-label">Wybierz swoje wyzwanie</span>
+        <p>Kliknij zadanie, które dziś wykonasz — niech będzie Twoim małym zwycięstwem.</p>
+        <div class="pick-list" id="umyslChallenge">
+          <button type="button" data-c="1">✋ Zmień rękę — umyj zęby lub uczesz się tą drugą ręką niż zwykle.</button>
+          <button type="button" data-c="2">🚶 Złam rutynę spaceru — skręć dziś w nieznaną wcześniej uliczkę.</button>
+          <button type="button" data-c="3">🔤 Zabawa w słowa — wymień 10 przedmiotów na literę „P” w Twojej kuchni.</button>
+        </div>
+      </div>
+
+      <h4><span class="em">💎</span> Co dzięki temu zyskujesz?</h4>
+      <p>Każda nowa ścieżka w lesie to Twoja <strong>rezerwa poznawcza</strong> — potężny kapitał zdrowotny na przyszłość. Im więcej takich zapasowych dróg wydepczesz w głowie teraz, tym dłużej zachowasz świetną pamięć, jasność umysłu i pełną niezależność.</p>
+      <p>Wiek to tylko cyfra. Twój mózg jest gotowy na rozwój w każdym momencie — wystarczy dać mu szansę!</p>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Badania opublikowane w czasopiśmie <em>Nature Medicine</em> (zespół prof. Petera Erikssona) udowodniły, że w ludzkim hipokampie — centrum naszej pamięci — nowe komórki nerwowe rodzą się każdego dnia, nawet u osób w wieku 90 lat. Warunek jest jeden: trzeba dostarczać mózgowi nowych bodźców.</p>
+      </div>
+    </article>
+
+    <div class="back-top"><button onclick="goTo('welcome')">↑ Wróć do strony głównej</button></div>
+  </div>
+</section>
+
+<!-- ====================== DOM ====================== -->
+<section class="section" id="dom">
+  <div class="section-header">
+    <div class="section-header-inner">
+      <div class="stamp-lg">🌿</div>
+      <span class="eyebrow" style="color:var(--gold-bright);">Kategoria: Świadomy Dom</span>
+      <h2>Dom, który chroni — zamiast szkodzić</h2>
+      <p class="deck">Od niewidzialnego mikroplastiku w kuchni po fizyczne pułapki w przedpokoju — proste, bezkosztowe zmiany o ogromnym znaczeniu.</p>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <article class="lesson">
+      <span class="lesson-tag">Lekcja 1</span>
+      <h3 class="lesson-title">Niewidzialni goście w Twoim domu</h3>
+      <p class="subhead">Jak prosto zadbać o czyste otoczenie</p>
+
+      <p>Nasz dom to nasz azyl. Jednak świat wokół nas bardzo się zmienił w ciągu ostatnich kilkudziesięciu lat — pojawiły się materiały, o których nasi dziadkowie nawet nie słyszeli. Gwiazdą tej lekcji jest plastik oraz jego ukryta, mikroskopijna wersja.</p>
+
+      <div class="fact-box">
+        <span class="tip-label">💳 Czy wiesz, że „zjadasz” kartę kredytową?</span>
+        <p>Naukowcy z Uniwersytetu w Newcastle wyliczyli, że każdy z nas — wdychając powietrze i jedząc codzienne posiłki — przyjmuje do organizmu około <strong>5 gramów plastiku tygodniowo</strong>. To dokładnie tyle, ile waży plastikowa karta bankomatowa! Te drobiny, zwane mikroplastikiem, mogą przenikać do narządów i zaburzać pracę hormonów.</p>
+      </div>
+
+      <h4><span class="em">🕵️</span> Trzech podejrzanych w Twojej kuchni</h4>
+      <ol class="steps">
+        <li><strong>Plastikowa deska do krojenia</strong> — ostry nóż odłupuje tysiące mikroskopijnych wiórków, które lądują na kanapce.<br><em>Prosta zmiana:</em> zastąp ją deską drewnianą lub szklaną.</li>
+        <li><strong>Pudełka plastikowe w mikrofalówce</strong> — pod wpływem ciepła plastik uwalnia do jedzenia szkodliwe bisfenole, nawet z napisem „bezpieczne dla mikrofalówki”.<br><em>Prosta zmiana:</em> przełóż jedzenie na szklany lub ceramiczny talerz przed podgrzaniem.</li>
+        <li><strong>Porysowana patelnia teflonowa</strong> — uszkodzony teflon przy podgrzaniu uwalnia toksyny.<br><em>Prosta zmiana:</em> wybieraj patelnie ceramiczne lub żeliwne, mieszaj wyłącznie drewnianą lub silikonową łyżką.</li>
+      </ol>
+
+      <h4><span class="em">👗</span> Szafa, która pozwala skórze oddychać</h4>
+      <p>Z wiekiem skóra staje się cieńsza, bardziej sucha i podatna na alergie. Większość tanich ubrań zrobiona jest z poliestru, akrylu lub nylonu — to plastik rozciągnięty w nitki. Skóra w takim ubraniu nie oddycha, a ciało ma problem z regulacją temperatury, co obciąża układ krążenia.</p>
+      <div class="tip gold">
+        <span class="tip-label">Ściągawka na zakupy</span>
+        Zanim kupisz bluzkę lub sweter, znajdź metkę wewnątrz ubrania i szukaj słów: <strong>Bawełna, Len, Wełna</strong> lub <strong>Wiskoza</strong>. Twoja skóra natychmiast poczuje różnicę.
+      </div>
+
+      <h4><span class="em">🧴</span> Kosmetyki — im krótsza lista, tym lepiej</h4>
+      <p>Dojrzała skóra potrzebuje tak naprawdę tylko dwóch rzeczy: nawilżenia i ochrony.</p>
+      <ul>
+        <li><strong>Krem z filtrem (SPF)</strong> — używaj go przez cały rok, także w pochmurne dni. Słońce odpowiada za plamy starcze i niszczy naczynka krwionośne.</li>
+        <li><strong>Unikaj sztucznych zapachów</strong> — mocne substancje zapachowe (Parfum) najczęściej wywołują swędzenie i zaczerwienienia. Wybieraj wersje hipoalergiczne lub dla dzieci.</li>
+      </ul>
+
+      <div class="challenge-box">
+        <span class="tip-label">🧠 Twój dzisiejszy krok dla zdrowia</span>
+        <p>Zrób dziś mały obchód po kuchni. Znajdź choć jedną plastikową rzecz, która ma bezpośredni kontakt z gorącym jedzeniem, i zastąp ją drewnem, metalem lub szkłem.</p>
+      </div>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Według raportów Europejskiej Agencji Chemikaliów (ECHA) substancje używane do zmiękczania plastiku (ftalany i BPA) zaliczane są do związków zaburzających gospodarkę hormonalną człowieka. Ograniczenie ich kontaktu z żywnością to najprostsza rekomendowana przez lekarzy metoda profilaktyki zdrowotnej.</p>
+      </div>
+    </article>
+
+    <article class="lesson">
+      <span class="lesson-tag">Lekcja 2</span>
+      <h3 class="lesson-title">Świadoma Pielęgnacja</h3>
+      <p class="subhead">Dlaczego w kosmetykach dojrzałych „mniej oznacza więcej”?</p>
+
+      <p>Wraz z upływem lat zmienia się całe nasze ciało, a skóra jest tego najbardziej widocznym znakiem — staje się cieńsza, produkuje mniej naturalnych olejów i wolniej się regeneruje. Dermatolodzy podkreślają: dojrzała skóra nie jest chora — jest po prostu wymagająca i delikatna.</p>
+
+      <div class="fact-box">
+        <span class="tip-label">Złota zasada pielęgnacji</span>
+        <p>Im krótszy skład kosmetyku, tym bezpieczniejszy i zdrowszy jest on dla Twojej skóry.</p>
+      </div>
+
+      <h4><span class="em">🛡️</span> Gdzie podział się płaszcz ochronny?</h4>
+      <p>Skóra jest naturalnie pokryta cienką warstwą tłuszczów i wody — naukowcy nazywają to <strong>barierą hydrolipidową</strong>. Działa jak niewidzialna tarcza, nie pozwalając wodzie uciekać z organizmu i blokując dostęp bakteriom. Z wiekiem ta tarcza staje się dziurawa — stąd uciążliwe swędzenie skóry (świąd starczy), uczucie ściągnięcia po myciu i pieczenie.</p>
+
+      <h4><span class="em">🚫</span> Czarna lista składników — czego unikać?</h4>
+      <ol class="steps">
+        <li><strong>Parabeny</strong> — silne konserwanty. U osób starszych łatwo przenikają przez osłabioną barierę ochronną, wywołując alergie i pokrzywkę.<br><em>Szukaj na etykiecie:</em> słów kończących się na <em>-paraben</em> (np. Methylparaben, Propylparaben).</li>
+        <li><strong>Silikony</strong> — dają złudne uczucie gładkości, ale działają jak plastikowa folia na twarzy: skóra nie oddycha, a długofalowo silikony mocno ją wysuszają.<br><em>Szukaj na etykiecie:</em> słów kończących się na <em>-cone</em> lub <em>-xane</em> (np. Dimethicone, Cyclopentasiloxane).</li>
+        <li><strong>Silne detergenty SLS i SLES</strong> — odpowiadają za mocne pienienie się szamponu czy żelu, ale dosłownie zmywają naturalny tłuszcz chroniący skórę.<br><em>Szukaj na etykiecie:</em> Sodium Lauryl Sulfate, Sodium Laureth Sulfate.</li>
+      </ol>
+
+      <h4><span class="em">🌿</span> Kosmetyczna zamiana: wybieraj mądrze</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Czego unikać</th><th>Co wybierać</th><th>Co to daje skórze?</th></tr></thead>
+          <tbody>
+            <tr><td>Silikony i oleje mineralne (parafina)</td><td>Naturalne oleje roślinne (migdałowy, arganowy, masło shea)</td><td>Trwale naprawiają płaszcz ochronny, zamiast tylko go udawać</td></tr>
+            <tr><td>Sztuczne zapachy (Parfum)</td><td>Kosmetyki bezzapachowe / hipoalergiczne</td><td>O 90% mniejsze ryzyko alergii, łzawienia oczu i pieczenia</td></tr>
+            <tr><td>Agresywne żele z SLS</td><td>Emulsje micelarne lub olejki do mycia</td><td>Delikatnie oczyszczają, skóra po myciu nie jest ściągnięta</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="challenge-box">
+        <span class="tip-label">🧠 Twój dzisiejszy krok dla zdrowej skóry</span>
+        <p>Zrób przegląd swojej łazienki. Weź ulubiony krem lub żel pod prysznic i poszukaj na etykiecie słów: <em>Parfum</em>, <em>SLS</em> lub <em>Dimethicone</em>. Jeśli tam są, przy następnych zakupach poszukaj produktu z napisem „0% parabenów, 0% zapachów” lub prostego produktu aptecznego (emolientu).</p>
+      </div>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Badania Polskiego Towarzystwa Dermatologicznego nad świądem starczym (<em>pruritus senilis</em>) wykazują, że głównym czynnikiem nasilającym te dolegliwości jest stosowanie kosmetyków zawierających silne detergenty (SLS) oraz syntetyczne substancje zapachowe. Raport Komitetu Naukowego ds. Bezpieczeństwa Konsumentów (SCCS) rekomenduje ograniczanie silnych konserwantów w produktach dla osób z uszkodzoną barierą naskórkową.</p>
+      </div>
+    </article>
+
+    <article class="lesson" style="border-bottom:none;">
+      <span class="lesson-tag">Lekcja 3</span>
+      <h3 class="lesson-title">Dom, który wspiera</h3>
+      <p class="subhead">Jak bezpieczna i czysta przestrzeń leczy ciało i umysł</p>
+
+      <p>To, jak wygląda otoczenie, w którym spędzasz najwięcej czasu, bezpośrednio wpływa na sprawność Twojego mózgu i bezpieczeństwo stawów. Zobacz, jak za pomocą prostych zmian przekształcić dom w miejsce, które dodaje energii, zamiast ją odbierać.</p>
+
+      <h4><span class="em">🕵️</span> Fizyczne bezpieczeństwo — likwidujemy „ukryte pułapki”</h4>
+      <div class="tip warn">
+        <span class="tip-label">Statystyka, która zaskakuje</span>
+        Ponad 80% upadków osób dojrzałych nie zdarza się zimą na śliskim chodniku, lecz we własnej, doskonale znanej łazience, kuchni czy przedpokoju.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Zagrożenie</th><th>Dlaczego jest niebezpieczne?</th><th>Proste rozwiązanie</th></tr></thead>
+          <tbody>
+            <tr><td>Małe dywaniki i chodniczki</td><td>Podwijają się na rogach lub ślizgają pod naciskiem stopy.</td><td>Usuń je lub podklej tanią taśmą antypoślizgową.</td></tr>
+            <tr><td>Klapki bez pięty</td><td>Stopa „pływa”, mózg dostaje błędne sygnały o stabilności podłoża.</td><td>Wybierz kapcie z zakrytą piętą i gumową podeszwą.</td></tr>
+            <tr><td>Ciemność w nocy</td><td>Wstawanie do toalety w nocy to moment największego ryzyka.</td><td>Lampki nocne z czujnikiem ruchu w korytarzu.</td></tr>
+            <tr><td>Gładkie kafelki w łazience</td><td>Woda + mydło + twarda terakota = gotowy przepis na poślizg.</td><td>Uchwyt ścienny przy wannie i mata z przyssawkami w brodziku.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4><span class="em">🧠</span> Minimalizm dla umysłu</h4>
+      <p>Zagracony pokój dosłownie męczy układ nerwowy. Każda rzecz na widoku wysyła do oka sygnał: „zadanie do wykonania”. W rezultacie:</p>
+      <ul>
+        <li><strong>Porwanie uwagi</strong> — nadmiar rzeczy przeciąża pamięć roboczą, trudniej się skupić.</li>
+        <li><strong>Wzrost kortyzolu</strong> — zagracone pomieszczenia podnoszą poziom hormonu stresu.</li>
+        <li><strong>Zmęczenie sensoryczne</strong> — mózg potrzebuje więcej energii na przetwarzanie bodźców; pusta przestrzeń to chwila wytchnienia.</li>
+      </ul>
+
+      <div class="tip gold">
+        <span class="tip-label">Zasada „Jednej płaszczyzny”</span>
+        Wybierz jedną płaszczyznę w pokoju — np. blat stołu czy komodę — i schowaj z niej wszystko poza jednym ulubionym przedmiotem. Jedno czyste miejsce natychmiast przyniesie Twoim oczom i głowie poczucie ulgi.
+      </div>
+
+      <h4><span class="em">🏠</span> Trzy złote zasady organizacji przestrzeni</h4>
+      <ol class="steps">
+        <li><strong>Zasada stałego adresu</strong> — klucze, portfel, telefon i okulary mają jedno, niezmienne miejsce (np. miseczka w przedpokoju).</li>
+        <li><strong>Sezonowa rotacja ubrań</strong> — w szafie trzymaj tylko to, co nosisz w danej porze roku.</li>
+        <li><strong>Segregacja dokumentów</strong> — rachunki, dokumentację medyczną i listy trzymaj w osobnych, opisanych teczkach.</li>
+      </ol>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Badanie z Instytutu Neurobiologii Uniwersytetu Princeton (2011) wykazało rezonansem magnetycznym, że fizyczny bałagan drastycznie ogranicza zdolność kory przedczołowej do przetwarzania informacji. Raport Instytutu Architektury i Neuronauki (ANFA) potwierdza, że przestrzeń bez barier architektonicznych i nadmiaru bodźców przedłuża samodzielność osób starszych.</p>
+      </div>
+    </article>
+
+    <div class="back-top"><button onclick="goTo('welcome')">↑ Wróć do strony głównej</button></div>
+  </div>
+</section>
+
+<!-- ====================== DIETA (placeholder cross-link, content already inside Umysł lekcja 2, but also referenced as own category) ====================== -->
+<section class="section" id="dieta">
+  <div class="section-header">
+    <div class="section-header-inner">
+      <div class="stamp-lg">🥦</div>
+      <span class="eyebrow" style="color:var(--gold-bright);">Kategoria: Dieta dla długowieczności</span>
+      <h2>Superpaliwo dla bystrego umysłu</h2>
+      <p class="deck">Brain Food, dieta MIND i sekret nawodnienia — wszystko, co warto wiedzieć o jedzeniu, które chroni pamięć.</p>
+    </div>
+  </div>
+  <div class="content">
+
+    <article class="lesson">
+      <span class="lesson-tag">Lekcja 1</span>
+      <h3 class="lesson-title">Brain Food</h3>
+      <p class="subhead">Superpaliwo dla bystrego umysłu i dobrej pamięci</p>
+
+      <p>Czy wiesz, że Twój mózg to największy żarłok w całym organizmie? Waży zaledwie około <strong>1,4 kilograma</strong> (czyli ok. 2% masy całego ciała), ale do prawidłowego działania potrzebuje aż <strong>20% całej energii</strong>, którą dostarczasz z jedzeniem!</p>
+
+      <p>To, co kładziesz na talerzu, ma bezpośredni wpływ na to, jak szybko przypominasz sobie imię sąsiada, gdzie odłożyłeś okulary, oraz jak dobrze radzisz sobie z codziennymi łamigłówkami. Naukowcy wyselekcjonowali grupę produktów zwaną <strong>„Brain Food”</strong> (jedzenie dla mózgu) — potrafią one fizycznie spowolnić starzenie się komórek nerwowych i chronić przed demencją.</p>
+
+      <h4><span class="em">🧠</span> Dlaczego mózg potrzebuje specjalnego menu?</h4>
+      <p>Komórki nerwowe komunikują się ze sobą za pomocą impulsów elektrycznych i chemicznych. Aby ta „poczta” działała bez opóźnień, mózg potrzebuje stałej dostawy zdrowych tłuszczów, witamin i silnych antyoksydantów. Z wiekiem mogą pojawiać się mikrostany zapalne oraz uszkodzenia wywołane przez wolne rodniki. Produkty typu Brain Food działają jak tarcza — neutralizują te zagrożenia i dosłownie „oliwią” tryby pamięci.</p>
+
+      <h4><span class="em">🛒</span> Wielka Szóstka dla Twoich neuronów</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Produkt</th><th>Co w sobie kryje?</th><th>Dlaczego warto?</th></tr></thead>
+          <tbody>
+            <tr><td>Tłuste ryby<br><span style="color:var(--ink-soft); font-size:15px;">makrela, śledź, łosoś, sardynki</span></td><td>Kwasy tłuszczowe Omega-3</td><td>Ponad 60% mózgu to tłuszcze. Omega-3 budują błony komórek nerwowych i poprawiają przepływ krwi w głowie.</td></tr>
+            <tr><td>Orzechy włoskie</td><td>Witamina E, polifenole, antyoksydanty</td><td>Nie bez powodu przypominają kształtem mózg! Poprawiają pamięć roboczą i chronią neurony przed stresem oksydacyjnym.</td></tr>
+            <tr><td>Owoce jagodowe<br><span style="color:var(--ink-soft); font-size:15px;">borówki, jagody, maliny</span></td><td>Antocyjany (silne barwniki roślinne)</td><td>Działają jak ekipa sprzątająca — usuwają toksyczne białka i mogą opóźnić starzenie się mózgu nawet o 2,5 roku.</td></tr>
+            <tr><td>Jajka<br><span style="color:var(--ink-soft); font-size:15px;">zwłaszcza żółtko</span></td><td>Cholina i witaminy z grupy B</td><td>Z choliny mózg produkuje acetylocholinę — neuroprzekaźnik odpowiedzialny za zapamiętywanie i koncentrację.</td></tr>
+            <tr><td>Zielone warzywa<br><span style="color:var(--ink-soft); font-size:15px;">szpinak, jarmuż, brokuły</span></td><td>Witamina K, luteina, kwas foliowy</td><td>Osoby jedzące jedną porcję dziennie mają sprawność umysłową ludzi o 11 lat młodszych!</td></tr>
+            <tr><td>Kurkuma</td><td>Kurkumina</td><td>Działanie przeciwzapalne — pomaga oczyszczać mózg z płytek amyloidowych, głównej przyczyny choroby Alzheimera.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4><span class="em">☕</span> Czarna kawa i gorzka czekolada — legalne wspomagacze</h4>
+      <p>Poranna kawa oraz kostka gorzkiej czekolady (minimum 70% kakao) to genialne paliwo dla głowy. <strong>Kofeina</strong> blokuje adenozynę, substancję wywołującą senność, dzięki czemu poprawia się czas reakcji i czujność. <strong>Gorzka czekolada</strong> to bomba flawonoidowa — zwiększa dopływ krwi do obszarów mózgu odpowiedzialnych za pamięć.</p>
+
+      <div class="fact-box">
+        <span class="tip-label">💡 Czym jest acetylocholina?</span>
+        <p>Wyobraź sobie, że mózg to sieć telefoniczna. Acetylocholina to monter, który dba o to, by kable były całe, a sygnał czysty. Gdy brakuje choliny (jajka, ryby), monter idzie na urlop — sygnał zaczyna rwać: zapominasz, po co wszedłeś do pokoju, albo nie możesz przypomnieć sobie prostego słowa.</p>
+      </div>
+
+      <div class="challenge-box">
+        <span class="tip-label">🍽️ Twój dzisiejszy mikro-krok dietetyczny</span>
+        <p>Wybierz jedno proste zadanie: dodaj pół łyżeczki kurkumy ze szczyptą pieprzu (zwiększa wchłanianie aż o 2000%!) do zupy, zjedz 5 orzechów włoskich zamiast ciastka, albo dorzuć garść szpinaku do jajecznicy.</p>
+      </div>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Badanie McAnulty i współpracowników (<em>Nutrition Research</em>) udowodniło, że regularne spożywanie borówek amerykańskich znacząco zwiększa poziom przeciwutleniaczy w osoczu i poprawia funkcje poznawcze u osób starszych. Analizy opublikowane w <em>Neurology</em> (2018) wykazały, że codzienne spożywanie zielonych warzyw liściastych wiąże się z wolniejszym tempem pogarszania się pamięci, odpowiadającym odmłodzeniu mózgu o ponad dekadę.</p>
+      </div>
+    </article>
+
+    <article class="lesson" style="border-bottom:none;">
+      <span class="lesson-tag">Lekcja 2</span>
+      <h3 class="lesson-title">Nawodnienie i dieta MIND</h3>
+      <p class="subhead">Dwa uzupełniające fakty, o których mówi się stanowczo za rzadko</p>
+
+      <p>Z wiekiem nasze ciało zmienia się w naturalny sposób — metabolizm zwalnia, więc potrzebujemy nieco mniej jedzenia niż kiedyś. Tu kryje się jednak haczyk: potrzebujemy mniej kalorii, ale <strong>tyle samo, a czasem więcej</strong> witamin i minerałów.</p>
+
+      <h4><span class="em">🚰</span> Wielka pułapka: gdy organizm zapomina o pragnieniu</h4>
+      <p>Z wiekiem w mózgu wycisza się ośrodek pragnienia. Starszy organizm może być bliski odwodnienia, a człowiek zupełnie nie czuje, że chce mu się pić! Lekarze geriatrzy często spotykają pacjentów z objawami przypominającymi demencję — dezorientacją, osłabieniem, problemami z pamięcią — które mijają w kilkanaście minut po podaniu kroplówki z wodą i elektrolitami.</p>
+
+      <div class="tip">
+        <span class="tip-label">Wskazówka naukowa</span>
+        Nie czekaj, aż poczujesz pragnienie. Postaw rano na stole dzbanek z wodą (ok. 1,5 litra) i pij mały łyk co pół godziny. Twoje stawy, serce i pamięć potrzebują tej wody jak wysuszona roślina.
+      </div>
+
+      <h4><span class="em">🧠</span> Dieta MIND — tarcza obronna dla neuronów</h4>
+      <p>Naukowcy z Rush University w Chicago stworzyli dietę <strong>MIND</strong> (od ang. <em>mind</em> — umysł): połączenie najzdrowszych elementów kuchni śródziemnomorskiej i diety obniżającej ciśnienie krwi.</p>
+
+      <div class="fact-box">
+        <span class="tip-label">Wyniki, które zachwyciły medycynę</span>
+        <p>U osób, które trzymały się zasad diety MIND, ryzyko zachorowania na chorobę Alzheimera spadło aż o <strong>53%</strong>. Nawet u tych, którzy przestrzegali jej tylko częściowo, ryzyko zmalało o 35%.</p>
+      </div>
+
+      <p>Zamiast rewolucji, zacznij od małych kroków: zastąp masło oliwą z oliwek lub olejem rzepakowym i jedz ryby zamiast ciężkiego, czerwonego mięsa.</p>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Przełomowe badania nad dietą MIND opublikowano w czasopiśmie <em>Alzheimer's & Dementia</em> pod przewodnictwem dr Marthy Clare Morris.</p>
+      </div>
+    </article>
+
+    <div class="back-top"><button onclick="goTo('welcome')">↑ Wróć do strony głównej</button></div>
+  </div>
+</section>
+
+<!-- ====================== CYFROWY ŚWIAT ====================== -->
+<section class="section" id="cyfrowy">
+  <div class="section-header">
+    <div class="section-header-inner">
+      <div class="stamp-lg">📱</div>
+      <span class="eyebrow" style="color:var(--gold-bright);">Kategoria: Cyfrowy świat</span>
+      <h2>Smartfon pod kontrolą</h2>
+      <p class="deck">Jak okiełznać telefon, zadbać o kręgosłup i sen — i jak bezstresowo rozpoznać oszustów.</p>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <article class="lesson">
+      <span class="lesson-tag">Lekcja 1</span>
+      <h3 class="lesson-title">Cyfrowy balans</h3>
+      <p class="subhead">Jak okiełznać smartfon i zadbać o kręgosłup</p>
+
+      <p>Nowoczesne telefony to absolutny cud techniki — pozwalają zobaczyć wnuka na drugim końcu świata czy sprawdzić rozkład autobusów. To okno na świat, z którego nie warto rezygnować. Ludzkie ciało ewoluowało jednak w zupełnie innych warunkach i płaci pewien biologiczny koszt za wielogodzinne wpatrywanie się w mały, świecący ekran.</p>
+
+      <h4><span class="em">📱</span> Zjawisko „smartfonowej szyi”</h4>
+      <p>Głowa dorosłego człowieka waży około 5 kilogramów. Gdy stoisz prosto, kręgosłup niesie ten ciężar bez wysiłku. Problem zaczyna się, gdy pochylasz głowę nad telefonem trzymanym nisko.</p>
+
+      <div class="fact-box">
+        <span class="tip-label">Im niżej, tym ciężej</span>
+        <p>Przy pochyleniu głowy pod kątem 60 stopni nacisk na odcinek szyjny wzrasta aż do <strong>27 kilogramów</strong> — to ciężar porównywalny z workiem ziemniaków albo siedmioletnim dzieckiem!</p>
+      </div>
+
+      <div class="tip gold">
+        <span class="tip-label">Proste rozwiązanie</span>
+        Nie musisz odkładać telefonu — po prostu unieś go wyżej, na wysokość oczu. Pozwól pracować rękom, a nie karkowi.
+      </div>
+
+      <h4><span class="em">🌙</span> Dlaczego telefon „kradnie” dobry sen?</h4>
+      <p>Ekrany emitują niebieskie światło, które w naturze występuje tylko o poranku — to sygnał słońca, że nadszedł dzień. Gdy patrzysz w ekran wieczorem w ciemnym pokoju, oszukujesz swój mózg, który blokuje produkcję melatoniny — hormonu odpowiadającego za zasypianie.</p>
+
+      <h4><span class="em">🧠</span> Cztery kroki do cyfrowej wolności</h4>
+      <ol class="steps">
+        <li><strong>Magiczna pierwsza godzina i tradycyjny budzik</strong> — nie używaj telefonu jako budzika. Przez pierwszą godzinę po przebudzeniu nie dotykaj telefonu: zjedz spokojnie śniadanie, wypij herbatę, spójrz przez okno.</li>
+        <li><strong>Zasada „Czystej Godziny” przed snem</strong> — na 60 minut przed snem odłóż telefon na szafkę, najlepiej w drugim pokoju. Poczytaj książkę lub porozmawiaj z bliskimi.</li>
+        <li><strong>Porządek w powiadomieniach</strong> — wyłącz dźwięki dla aplikacji informacyjnych i społecznościowych. Zostaw głośny dzwonek tylko dla połączeń od rodziny.</li>
+        <li><strong>Zmień pozycję ciała</strong> — oprzyj łokcie o stół, by ekran znalazł się wyżej. Co 15 minut spójrz przez okno na odległy punkt i zrób trzy głębokie wdechy.</li>
+      </ol>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Badania opublikowane w <em>Surgical Technology International</em> przez zespół dr. Kennetha Hansraja udowodniły, że „szyja smartfonowa” (Text Neck) prowadzi do przedwczesnego zwyrodnienia kręgosłupa. Badania Harvard Medical School potwierdzają, że czytanie z ekranu przed snem wydłuża czas zasypiania średnio o kilkadziesiąt minut.</p>
+      </div>
+    </article>
+
+    <article class="lesson">
+      <span class="lesson-tag">Lekcja 2</span>
+      <h3 class="lesson-title">Cyfrowa Tarcza</h3>
+      <p class="subhead">Jak bezstresowo rozpoznać oszustwa w sieci i przez telefon</p>
+
+      <p>Dawniej złodziej musiał włamać się do domu — dziś próbuje „włamać się” do naszej głowy za pomocą telefonu lub wiadomości tekstowej. Starsze pokolenie bywa celem oszustów nie dlatego, że gorzej myśli, ale dlatego, że wychowało się w czasach, gdy szacunek dla munduru i bezinteresowna chęć pomocy były normą.</p>
+
+      <h4><span class="em">🧠</span> Dlaczego dajemy się nabrać?</h4>
+      <p>To zjawisko nazywa się <strong>porwaniem emocjonalnym</strong>. Oszuści wywołują u Ciebie skrajne emocje — strach lub ekscytację. Gdy zalewa nas fala strachu, logicznie myśląca część mózgu zostaje wyłączona, a do głosu dochodzi instynkt przetrwania. Przestajemy analizować i zaczynamy ślepo wykonywać polecenia.</p>
+
+      <h4><span class="em">🕵️</span> Trzy najpopularniejsze pułapki</h4>
+      <ol class="steps">
+        <li><strong>Cyfrowy kamuflaż (spoofing telefoniczny)</strong> — na ekranie wyświetla się „Bank” lub „Policja”, choć numer może być sfałszowany. <em>Złota zasada:</em> policja ani bank nigdy nie żądają przez telefon haseł, PIN-ów ani wypłaty gotówki.</li>
+        <li><strong>Fałszywa przynęta (phishing SMS)</strong> — wiadomość o niedopłacie z linkiem do fałszywej strony banku. <em>Złota zasada:</em> nigdy nie klikaj w linki od nieznanych numerów.</li>
+        <li><strong>Oszustwa „na inwestycje” i „na serce”</strong> — cudowne akcje bez ryzyka albo nowo poznany „znajomy” proszący o pożyczkę. <em>Złota zasada:</em> w internecie nie ma darmowych pieniędzy.</li>
+      </ol>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Sytuacja</th><th>Prawdziwy urzędnik / bankier</th><th>Oszust</th></tr></thead>
+          <tbody>
+            <tr><td>Czas na decyzję</td><td>Daje czas, pozwala przyjść jutro</td><td>Naciska, pospiesza, grozi katastrofą</td></tr>
+            <tr><td>Poufne dane</td><td>Nigdy nie pyta o hasła ani PIN</td><td>Prosi o hasła, kody, instalację programu</td></tr>
+            <tr><td>Tajemnica</td><td>Pozwala skonsultować się z rodziną</td><td>Zabrania się rozłączać, każe milczeć</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip warn">
+        <span class="tip-label">🛡️ Metoda Trzech Kroków</span>
+        <strong>1. Stop i głęboki wdech</strong> — powiedz sobie: „to może być próba wyłudzenia”.<br>
+        <strong>2. Rozłącz się bez słowa</strong> — masz pełne prawo przerwać rozmowę w każdym momencie.<br>
+        <strong>3. Sprawdź u źródła</strong> — zadzwoń pod oficjalny numer banku lub bezpośrednio do krewnego, by potwierdzić.
+      </div>
+
+      <h4><span class="em">🎮</span> Zdemaskuj oszusta — szybki test</h4>
+      <div class="quiz-card">
+        <div class="quiz-q">SMS: „Masz nieopłaconą fakturę za telefon na kwotę 2,10 zł, kliknij link, aby uniknąć kary”. Co robisz?</div>
+        <div class="quiz-options">
+          <button onclick="quizAnswer(this,false,'sms')">Klikam w link</button>
+          <button onclick="quizAnswer(this,true,'sms')">Usuwam SMS</button>
+        </div>
+        <div class="quiz-feedback" id="fb-sms"></div>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-q">Dzwoni „pani z banku” i prosi o podanie kodu SMS, który właśnie przyszedł. Co robisz?</div>
+        <div class="quiz-options">
+          <button onclick="quizAnswer(this,false,'bank')">Podaję kod</button>
+          <button onclick="quizAnswer(this,true,'bank')">Rozłączam się</button>
+        </div>
+        <div class="quiz-feedback" id="fb-bank"></div>
+      </div>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Raport CERT Polska (NASK) pokazuje, że phishing stanowi ponad 70% wszystkich zgłaszanych incydentów bezpieczeństwa w Polsce. Badania FINRA Investor Education Foundation dowodzą, że kluczem do skuteczności oszustów nie jest brak wiedzy ofiary, lecz wywołanie stanu wysokiego pobudzenia emocjonalnego.</p>
+      </div>
+    </article>
+
+    <article class="lesson" style="border-bottom:none;">
+      <span class="lesson-tag">Lekcja 3</span>
+      <h3 class="lesson-title">Nowe zagrożenie: klonowanie głosu przez AI</h3>
+      <p class="subhead">Jak rodzinne hasło bezpieczeństwa chroni Was przed sztuczną inteligencją oszustów</p>
+
+      <p>Technologia rozwija się w błyskawicznym tempie i niestety oszuści również z niej korzystają. Kiedyś naciągacze musieli modulować głos, udawać chrypkę lub płakać do słuchawki, aby uwiarygodnić wersję o wypadku. Dzisiaj używają do tego Sztucznej Inteligencji (AI).</p>
+
+      <p>Współczesne programy komputerowe potrafią dokonać tzw. <strong>audio deepfake</strong>, czyli perfekcyjnego sklonowania ludzkiego głosu.</p>
+
+      <h4><span class="em">🤖</span> Jak to działa?</h4>
+      <ul>
+        <li>Oszustom wystarczy zaledwie 3 do 5 sekund czystego nagrania Twojego młodszego krewnego — np. z krótkiego filmu, który wnuk, córka lub sąsiad wrzucili publicznie na Facebooka, TikToka czy YouTube.</li>
+        <li>Sztuczna inteligencja analizuje unikalną barwę, tempo mowy oraz intonację tej osoby. Następnie oszust wpisuje na klawiaturze dowolny tekst (np. „Mamo, potrąciłem człowieka, jestem na policji, potrzebuję pieniędzy na kaucję”), a komputer odczytuje to identycznym głosem Twojego dziecka.</li>
+      </ul>
+
+      <div class="tip warn">
+        <span class="tip-label">Pułapka doskonała</span>
+        Usłyszenie w słuchawce autentycznego, spanikowanego głosu kogoś bliskiego natychmiast wyłącza nasze logiczne myślenie. Mózg automatycznie uznaje, że zagrożenie jest prawdziwe, bo „przecież słyszę własne dziecko!”. Oszuści bezwzględnie wykorzystują ten technologiczny szok.
+      </div>
+
+      <h4><span class="em">🛡️</span> Rodzinne Hasło Bezpieczeństwa</h4>
+      <p>Skoro technologia potrafi tak idealnie oszukać nasz słuch, musimy zastosować metodę, której żadna sztuczna inteligencja, haker ani komputer nie będą w stanie złamać. To <strong>Rodzinne Hasło Bezpieczeństwa</strong>.</p>
+
+      <div class="fact-box">
+        <span class="tip-label">Jedyna analogowa tarcza na cyfrowe oszustwa</span>
+        <p>Sztuczna inteligencja może sklonować struny głosowe Twoich bliskich, ale nie ma dostępu do Waszych wspólnych wspomnień i tajemnic ukrytych w głowach.</p>
+      </div>
+
+      <h4><span class="em">🔑</span> Jak to wdrożyć? Krok po kroku</h4>
+      <ol class="steps">
+        <li><strong>Ustalcie tajny kod</strong> — podczas najbliższego spotkania lub zwykłej rozmowy z bliskimi wymyślcie jedno unikalne słowo, krótkie zdanie lub kombinację kilku cyfr. Niech to będzie coś łatwego do zapamiętania dla Was, ale niemożliwego do odgadnięcia dla obcych — np. imię pierwszego psa z dzieciństwa, ulubiona potrawa z dawnych lat albo numer dawnego mieszkania. Unikajcie oczywistych haseł, takich jak data urodzenia czy imię wnuczki, bo oszust może je łatwo znaleźć w internecie.</li>
+        <li><strong>Zasada kryzysowa</strong> — umawiacie się, że to hasło służy wyłącznie do weryfikacji w nagłych, podejrzanych sytuacjach, kiedy ktoś prosi o pieniądze, podanie kodu BLIK czy danych do konta.</li>
+        <li><strong>Test weryfikacyjny</strong> — jeśli kiedykolwiek odbierzesz telefon od bliskiej osoby z dramatyczną prośbą o pomoc finansową, zachowaj spokój i powiedz stanowczo: „Dobrze, pomogę Ci, ale podaj najpierw nasze rodzinne hasło bezpieczeństwa”.</li>
+      </ol>
+
+      <h4><span class="em">🧠</span> Dlaczego ta metoda jest niezawodna?</h4>
+      <ul>
+        <li><strong>Oszust natychmiast pęknie</strong> — prawdziwy członek rodziny poda hasło w ułamku sekundy. Oszust stojący za programem do klonowania głosu nie będzie miał pojęcia, o co pytasz. Zacznie unikać odpowiedzi, denerwować się lub krzyczeć, że „nie ma na to czasu, bo zaraz zabiorą mu telefon”. To dla Ciebie natychmiastowy sygnał: rozłącz się, to oszustwo!</li>
+        <li><strong>Odmowa posłuszeństwa technologii</strong> — nawet jeśli na ekranie telefonu wyświetli się prawdziwy numer Twojego dziecka (oszustwo metodą spoofingu), brak tajnego hasła daje Ci stuprocentową pewność, że po drugiej stronie siedzi naciągacz.</li>
+      </ul>
+
+      <div class="challenge-box">
+        <span class="tip-label">💡 Zadanie na dziś dla Ciebie</span>
+        <p>Wykonaj dziś jeden ważny telefon do swoich dzieci, nastoletnich krewnych czy partnera. Powiedz im prosto z mostu: „Słuchajcie, czytałem o tym, że oszuści potrafią dziś idealnie podrobić głos przez komputer. Ustalmy jedno tajne słowo-klucz na wypadek sytuacji kryzysowych, żebyśmy zawsze mieli pewność, że rozmawiamy ze sobą”. Taka krótka, pięciominutowa rozmowa to najlepsza polisa ubezpieczeniowa dla Waszych życiowych oszczędności.</p>
+      </div>
+    </article>
+
+    <div class="back-top"><button onclick="goTo('welcome')">↑ Wróć do strony głównej</button></div>
+  </div>
+</section>
+
+<!-- ====================== SŁOWNIK ====================== -->
+<section class="section" id="slownik">
+  <div class="section-header">
+    <div class="section-header-inner">
+      <div class="stamp-lg">💬</div>
+      <span class="eyebrow" style="color:var(--gold-bright);">Kategoria: Słownik młodzieżowy</span>
+      <h2>Jak rozmawiać z wnukami i młodzieżą</h2>
+      <p class="deck">Poznanie nowych słów to nie tylko szansa na lepszy kontakt z wnukami — to też darmowy trening dla mózgu.</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <article class="lesson" style="border-bottom:none;">
+      <span class="lesson-tag">Lekcja 1</span>
+      <h3 class="lesson-title">Słownik młodzieżowy</h3>
+      <p class="subhead">Jak rozmawiać z wnukami i ćwiczyć elastyczność umysłu</p>
+
+      <p>Każde pokolenie ma swój własny język. Kiedyś mówiło się „klawo” lub „morowo”, potem „czadowo”, a dziś młodzi używają słów, które dla starszych osób mogą brzmieć obco. Dla Ciebie poznanie tych słów to nie tylko szansa na lepszy kontakt z wnukami, ale i doskonały, darmowy trening dla mózgu!</p>
+
+      <h4><span class="em">🧠</span> Elastyczność językowa kontra „sztywność poznawcza”</h4>
+      <p>W psychologii istnieje pojęcie <strong>sztywności poznawczej</strong> — naturalnej tendencji, by z wiekiem trudniej akceptować zmiany. Kiedy słyszymy nowe słowo i próbujemy je zrozumieć zamiast machnąć ręką, w płacie czołowym zachodzi intensywna praca — dokładnie taka sama, jak podczas nauki języka obcego.</p>
+
+      <h4><span class="em">📘</span> Mały słownik współczesnej młodzieży</h4>
+      <div class="slang-grid">
+        <div class="slang-card">
+          <div class="slang-word">Rel</div>
+          <div class="slang-mean">od ang. <em>relatable</em> — „zgadzam się”, „mam dokładnie tak samo”</div>
+          <div class="slang-ex">— Ale ten film był nudny. — No, totalny rel.</div>
+        </div>
+        <div class="slang-card">
+          <div class="slang-word">Crush</div>
+          <div class="slang-mean">osoba, w której ktoś się potajemnie zauroczył</div>
+          <div class="slang-ex">— Marek z równoległej klasy to mój nowy crush.</div>
+        </div>
+        <div class="slang-card">
+          <div class="slang-word">NPC</div>
+          <div class="slang-mean">z gier: postać z tła. O osobie nudnej, przewidywalnej, ciągle robiącej to samo</div>
+          <div class="slang-ex">— On zachowuje się jak zwykły NPC, zero własnego zdania.</div>
+        </div>
+        <div class="slang-card">
+          <div class="slang-word">Odklejka</div>
+          <div class="slang-mean">stan, w którym ktoś stracił kontakt z rzeczywistością lub mówi bzdury</div>
+          <div class="slang-ex">— Nauczyciel od fizyki ma dziś jakąś odklejkę.</div>
+        </div>
+        <div class="slang-card">
+          <div class="slang-word">Sigma</div>
+          <div class="slang-mean">osoba niezależna, pewna siebie — „samotny wilk” w pozytywnym znaczeniu</div>
+          <div class="slang-ex">— Twój dziadek to prawdziwy sigma, sam wszystko potrafi naprawić.</div>
+        </div>
+        <div class="slang-card">
+          <div class="slang-word">BFF</div>
+          <div class="slang-mean">Best Friends Forever — najlepszy przyjaciel na zawsze</div>
+          <div class="slang-ex">— Kasia to moja BFF, wiemy o sobie wszystko.</div>
+        </div>
+      </div>
+
+      <h4><span class="em">🤝</span> Most zamiast muru</h4>
+      <p>Kiedy senior używa — choćby z przymrużeniem oka — jednego słowa ze świata nastolatka, dzieje się coś niezwykłego. Młody człowiek czuje się bezpieczniej, widzi, że nie jesteś kimś z „innej planety”, i chętniej otwiera się na dłuższą rozmowę.</p>
+
+      <div class="challenge-box">
+        <span class="tip-label">💡 Twój dzisiejszy trening</span>
+        <p>Wybierz jedno słowo z tabeli (np. „rel”) i użyj go w najbliższej rozmowie z wnukiem. Kiedy powie, że pogoda jest okropna, odpowiedz: „No, totalny rel”. Zobaczysz uśmiech na jego twarzy!</p>
+      </div>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Badania Stanford Center on Longevity dowodzą, że regularna komunikacja międzygeneracyjna i przełamywanie barier językowych hamują poczucie samotności i izolacji społecznej u starszych dorosłych.</p>
+      </div>
+    </article>
+    <div class="back-top"><button onclick="goTo('welcome')">↑ Wróć do strony głównej</button></div>
+  </div>
+</section>
+
+<!-- ====================== RUCH ====================== -->
+<section class="section" id="ruch">
+  <div class="section-header">
+    <div class="section-header-inner">
+      <div class="stamp-lg">🚶</div>
+      <span class="eyebrow" style="color:var(--gold-bright);">Kategoria: Ruch to lek</span>
+      <h2>Ruch to lek</h2>
+      <p class="deck">To nie starość odbiera nam sprawność — to brak ruchu udaje starość.</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <article class="lesson" style="border-bottom:none;">
+      <span class="lesson-tag">Lekcja 1</span>
+      <h3 class="lesson-title">Ruch to lek</h3>
+      <p class="subhead">Gdyby aktywność fizyczna była tabletką, byłaby najczęściej przepisywanym i najtańszym lekiem na świecie</p>
+
+      <p>Wokół ruchu osób starszych narosło wiele mitów — najgroźniejszy z nich brzmi: „w pewnym wieku trzeba się oszczędzać”. Nauka mówi coś przeciwnego: <strong>to nie starość odbiera nam sprawność, ale brak ruchu udaje starość</strong>.</p>
+
+      <h4><span class="em">🧠</span> Mózg biega razem z Tobą</h4>
+      <p>Podczas aktywności aerobowej organizm produkuje białko BDNF, nazywane „nawozem dla neuronów”. Sprawia ono, że w hipokampie (centrum pamięci) rodzą się nowe komórki nerwowe.</p>
+      <div class="fact-box">
+        <span class="tip-label">Fakt naukowy</span>
+        <p>U seniorów, którzy spacerowali 3 razy w tygodniu po 40 minut, centrum pamięci powiększyło się o 2% w ciągu roku. U osób, które tylko siedziały, obszar ten skurczył się o 1,5%.</p>
+      </div>
+
+      <h4><span class="em">🦴</span> Ruszaj kością! Walka z osteoporozą i sarkopenią</h4>
+      <ul>
+        <li><strong>Sarkopenia (znikające mięśnie)</strong> — bez ruchu po 60. roku życia tracimy nawet do 15% masy mięśniowej na dekadę. Ruch oporowy (np. wstawanie z krzesła) potrafi ten proces zatrzymać.</li>
+        <li><strong>Kości potrzebują nacisku</strong> — spacer i stanie na nogach to sygnał dla organizmu, by wbudowywać wapń w kości.</li>
+        <li><strong>Płyn stawowy jak olej silnikowy</strong> — chrząstka karmi się tylko wtedy, gdy staw się zgina i prostuje. Brak ruchu „wysusza” stawy.</li>
+      </ul>
+
+      <h4><span class="em">❤️</span> Serce ze stali i młoda odporność</h4>
+      <p>Ruch zmusza naczynia krwionośne do rozszerzania i kurczenia, co przywraca im elastyczność i obniża ciśnienie. Każdy trening wysyła do krwi miliony „świeżych” komórek odpornościowych.</p>
+
+      <h4><span class="em">📋</span> Jak bezpiecznie dobrać aktywność?</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Aktywność</th><th>Dla kogo?</th><th>Co daje?</th><th>Na co uważać</th></tr></thead>
+          <tbody>
+            <tr><td>Nordic Walking</td><td>Dla każdego, kto lubi spacery</td><td>Angażuje 90% mięśni, odciąża kolana i kręgosłup o 15%</td><td>Kijki trzeba prawidłowo odpychać do tyłu</td></tr>
+            <tr><td>Joga / Pilates dla seniorów</td><td>Przy bólu pleców i sztywności</td><td>Rozciąga mięśnie, poprawia równowagę</td><td>Unikaj gwałtownych skłonów i pozycji wywołujących zawroty głowy</td></tr>
+            <tr><td>Aquaaerobik / pływanie</td><td>Przy nadwadze i bólach stawów</td><td>Woda unosi ciało — ważysz w niej tylko 10% swojej wagi</td><td>Dokładnie wysusz uszy i głowę po basenie</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4><span class="em">🏠</span> „Ukryty ruch”, czyli jak ćwiczyć bez ćwiczenia</h4>
+      <ul>
+        <li><strong>Trening równowagi przy zębach</strong> — podczas mycia zębów stań 30 sekund na jednej nodze, asekurując się przy umywalce.</li>
+        <li><strong>Schody zamiast windy</strong> — jedno lub dwa piętra to najlepszy, darmowy trening serca.</li>
+        <li><strong>Rozmowa telefoniczna na stojąco</strong> — 15 minut rozmowy w ruchu to około 1000 dodatkowych kroków!</li>
+      </ul>
+
+      <h4><span class="em">⏱️</span> Interaktywny test: „Test Kanapowy”</h4>
+      <p>Lekarze używają prostego testu (30-Second Chair Stand Test) do oceny sprawności nóg. Możesz wykonać go sam w domu:</p>
+      <ol class="steps">
+        <li>Usiądź na stabilnym krześle (bez kółek!), stopy płasko na podłodze.</li>
+        <li>Spleć ręce na klatce piersiowej — bez pomagania sobie rękami.</li>
+        <li>Włącz stoper w telefonie na 30 sekund.</li>
+        <li>Wstawaj do pełnego wyprostu i siadaj z powrotem tyle razy, ile potrafisz.</li>
+      </ol>
+      <div class="tip gold">
+        <span class="tip-label">Interpretacja wyniku (powyżej 65. roku życia)</span>
+        <strong>Poniżej 10 razy:</strong> nogi potrzebują pilnego wzmocnienia — zacznij od ćwiczeń na krześle.<br>
+        <strong>11–15 razy:</strong> dobry, stabilny wynik.<br>
+        <strong>Powyżej 15 razy:</strong> gratulacje — sprawność młodszego pokolenia. Prawdziwy „Sigma”!
+      </div>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Badanie University of Pittsburgh (dr Kirk Erickson) udowodniło, że umiarkowany ruch fizycznie zwiększa rozmiar hipokampu u starszych dorosłych. Wytyczne American Geriatrics Society wskazują, że trening siłowy z masą własnego ciała zmniejsza ryzyko upadków o ponad 30%.</p>
+      </div>
+    </article>
+    <div class="back-top"><button onclick="goTo('welcome')">↑ Wróć do strony głównej</button></div>
+  </div>
+</section>
+
+<!-- ====================== NIEBIESKIE STREFY ====================== -->
+<section class="section" id="strefy">
+  <div class="section-header">
+    <div class="section-header-inner">
+      <div class="stamp-lg">🔵</div>
+      <span class="eyebrow" style="color:var(--gold-bright);">Kategoria: Niebieskie Strefy</span>
+      <h2>Jak dożyć setki w doskonałym zdrowiu?</h2>
+      <p class="deck">Sekretem stulatków nie są rzadkie geny ani droga medycyna, lecz prosty, codzienny styl życia.</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <article class="lesson" style="border-bottom:none;">
+      <span class="lesson-tag">Lekcja 1</span>
+      <h3 class="lesson-title">Niebieskie Strefy (Blue Zones)</h3>
+      <p class="subhead">Badacze z National Geographic, na czele z Danem Buettnerem, znaleźli miejsca, w których ludzie żyją najdłużej i najszczęśliwiej</p>
+
+      <h4><span class="em">🗺️</span> Gdzie znajdują się Niebieskie Strefy?</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Region</th><th>Kim są mieszkańcy?</th></tr></thead>
+          <tbody>
+            <tr><td>Sardynia (Włochy)</td><td>Górska wioska z wieloma sprawnymi stuletnimi pasterzami</td></tr>
+            <tr><td>Okinawa (Japonia)</td><td>Najstarsze kobiety na świecie, spokój ducha, brak chorób serca</td></tr>
+            <tr><td>Ikaria (Grecja)</td><td>„Miejsce, gdzie ludzie zapominają umrzeć” — niemal zerowy wskaźnik demencji</td></tr>
+            <tr><td>Półwysep Nicoya (Kostaryka)</td><td>Najsilniejsze kości i naczynia krwionośne na świecie</td></tr>
+            <tr><td>Loma Linda (Kalifornia)</td><td>Adwentyści Dnia Siódmego, żyją średnio o 10 lat dłużej</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4><span class="em">📜</span> Cztery filary długowieczności</h4>
+
+      <p><strong>1. Ruch naturalny, a nie wyczynowy</strong><br>Żaden stulatek z Niebieskich Stref nie chodził na siłownię. Mieszkańcy Sardynii mieszkają w piętrowych domach, chodzą po schodach, uprawiają ogródki, do sklepu idą pieszo.</p>
+      <div class="tip">👉 <strong>Lekcja dla Ciebie:</strong> nie szukaj skomplikowanych ćwiczeń. Spacer, praca w ogródku czy sprzątanie domu to najlepszy, naturalny ruch.</div>
+
+      <p><strong>2. Zasada 80% i przewaga roślin</strong><br>Na Okinawie przed posiłkiem powtarza się: <em>„Hara hachi bu”</em> — jedz tylko do momentu, aż żołądek będzie pełny w 80%. Dieta w 95% to warzywa, strączki i pełnoziarnisty chleb; mięso jedzą rzadko, średnio 5 razy w miesiącu.</p>
+      <div class="tip">👉 <strong>Lekcja dla Ciebie:</strong> kończ posiłek, gdy czujesz, że mógłbyś zjeść jeszcze dwa kęsy. Dorzuć porcję warzyw do każdego dania.</div>
+
+      <p><strong>3. Ikigai — powód, dla którego rano wstajesz</strong><br>Japończycy nazywają to <em>Ikigai</em>, Kostarykanie <em>Plan de vida</em> — „sens życia”. Stulatkowie nie przechodzą na emeryturę w sensie psychicznym, czują się potrzebni.</p>
+      <div class="tip">👉 <strong>Lekcja dla Ciebie:</strong> znajdź swoją pasję, hobby lub mały poranny cel.</div>
+
+      <p><strong>4. Bliscy i „właściwe plemię”</strong><br>W Niebieskich Strefach samotność nie istnieje. Na Okinawie tworzy się tzw. <em>Moai</em> — grupy pięciorga przyjaciół wspierających się przez całe życie.</p>
+      <div class="tip">👉 <strong>Lekcja dla Ciebie:</strong> pielęgnuj relacje z młodszym pokoleniem, sąsiadami i przyjaciółmi. Samotność jest dla serca tak samo szkodliwa jak palenie papierosów!</div>
+
+      <h4><span class="em">🎮</span> Interaktywna checklista: stwórz swoją Niebieską Strefę</h4>
+      <p>Zaznacz nawyki, które już dziś goszczą w Twoim domu:</p>
+      <ul class="checklist" id="blueChecklist">
+        <li><input type="checkbox"><span>Zjadłem dziś porcję warzyw lub roślin strączkowych.</span></li>
+        <li><input type="checkbox"><span>Wstałem z fotela co najmniej 3 razy, żeby przespacerować się po mieszkaniu.</span></li>
+        <li><input type="checkbox"><span>Zamknąłem obiad z lekkim uczuciem niedosytu (zasada 80%).</span></li>
+        <li><input type="checkbox"><span>Porozmawiałem dziś z przyjacielem, sąsiadem lub kimś bliskim.</span></li>
+        <li><input type="checkbox"><span>Mam sprecyzowany mały cel na jutrzejszy poranek.</span></li>
+      </ul>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Projekt „Blue Zones” powstał na bazie badań dr. Gianniego Pesa i dr. Michela Poulaina, którzy jako pierwsi zidentyfikowali zagęszczenie stulatków w prowincji Nuoro na Sardynii. Analizy opublikowane w <em>American Journal of Lifestyle Medicine</em> potwierdzają, że styl życia oparty na relacjach społecznych, umiarkowanej diecie i naturalnym ruchu pozwala uniknąć większości chorób cywilizacyjnych.</p>
+      </div>
+    </article>
+    <div class="back-top"><button onclick="goTo('welcome')">↑ Wróć do strony głównej</button></div>
+  </div>
+</section>
+
+<section class="section" id="ai">
+  <div class="section-header">
+    <div class="section-header-inner">
+      <div class="stamp-lg">🤖</div>
+      <span class="eyebrow" style="color:var(--gold-bright);">Kategoria: Sztuczna Inteligencja</span>
+      <h2>Twój nowy, niezwykle cierpliwy asystent</h2>
+      <p class="deck">AI to nie tylko technologia dla młodych informatyków — to darmowy pomocnik, który może ułatwić Twoje codzienne życie już dziś.</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <article class="lesson" style="border-bottom:none;">
+      <span class="lesson-tag">Lekcja 1</span>
+      <h3 class="lesson-title">Sztuczna Inteligencja (AI)</h3>
+      <p class="subhead">Twój nowy, niezwykle cierpliwy asystent</p>
+
+      <p>W radiu, telewizji i gazetach bez przerwy słyszy się dziś dwa słowa: <strong>Sztuczna Inteligencja</strong> (lub skrót z języka angielskiego: <strong>AI</strong>). Mówi się o niej w kontekście robotów, przyszłości medycyny, a czasem — jak widzieliśmy w rozdziale o oszustwach — w kontekście cyfrowych zagrożeń. Można odnieść wrażenie, że to skomplikowana technologia przeznaczona wyłącznie dla młodych informatyków. Nic bardziej mylnego!</p>
+
+      <h4><span class="em">🧐</span> Co to w ogóle jest ta Sztuczna Inteligencja?</h4>
+      <p>Wyobraź sobie, że masz w telefonie lub komputerze cyfrowego asystenta, który przeczytał wszystkie encyklopedie, książki, gazety i strony internetowe, jakie kiedykolwiek powstały na świecie. Ten asystent pamięta każdą z tych informacji i potrafi odpowiedzieć na Twoje pytania w ułamku sekundy.</p>
+
+      <div class="fact-box">
+        <span class="tip-label">Prosta analogia</span>
+        <p>Klasyczna wyszukiwarka internetowa (np. Google) działa jak bibliotekarz, który na Twoje pytanie daje Ci stos 20 grubych książek i mówi: „Poszukaj sobie sam". Sztuczna Inteligencja działa inaczej — ona sama czyta te książki za Ciebie, wybiera najważniejsze informacje i odpowiada Ci prostymi, pełnymi zdaniami, dokładnie tak, jakbyś rozmawiał z żywym człowiekiem.</p>
+      </div>
+
+      <p>Przez dziesięciolecia komputery były genialne w liczeniu, ale nie rozumiały ludzkiej mowy. Przełom nastąpił niedawno: naukowcy stworzyli programy, które <strong>nauczyły się pisać i myśleć logicznie w naszym języku</strong>. Dzisiaj nie musisz być programistą — rozmawiasz z komputerem po polsku, a on doskonale rozumie Twoje intencje, nastrój, a nawet żarty.</p>
+
+      <h4><span class="em">🛠️</span> Jak senior może to sprawdzić samemu?</h4>
+      <p>W celu przetestowania możliwości oferowanych przez sztuczną inteligencję nie musisz nic płacić ani instalować skomplikowanych programów. Poniżej znajdziesz dwa najpopularniejsze, bezpieczne i darmowe narzędzia na świecie — obie strony obsługują język polski:</p>
+
+      <ul>
+        <li>👉 <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT (chatgpt.com)</a> — najsłynniejszy cyfrowy rozmówca. Po wejściu na stronę zobaczysz proste okno czatu, które wygląda jak okienko do pisania SMS-ów.</li>
+        <li>👉 <a href="https://copilot.microsoft.com" target="_blank" rel="noopener">Microsoft Copilot (copilot.microsoft.com)</a> — darmowy asystent od Microsoftu, który potrafi również szukać najświeższych informacji w internecie i pokazywać zdjęcia.</li>
+      </ul>
+
+      <div class="tip gold">
+        <span class="tip-label">Instrukcja obsługi w dwóch krokach</span>
+        <strong>1.</strong> Kliknij w jeden z powyższych linków.<br><br>
+        <strong>2.</strong> Na dole ekranu znajdź pole tekstowe z napisem „Napisz wiadomość". Wpisz dowolne pytanie po polsku (np. <em>„Cześć, jak mija dzień?"</em>) i naciśnij klawisz Enter lub ikonę strzałki.<br><br>
+        Jeśli coś napisze zbyt skomplikowanie, odpowiedz mu: <em>„Wytłumacz mi to prościej, jak emerytowi"</em> — posłusznie zmieni język.
+      </div>
+
+      <h4><span class="em">💡</span> Praktyczne zastosowania — o co jeszcze możesz zapytać?</h4>
+      <p>Sztuczna inteligencja nie ocenia, nigdy się nie wścieka i możesz pytać ją o tę samą rzecz sto razy.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kategoria</th><th>Przykład pytania po polsku</th><th>Dlaczego to pomaga?</th></tr></thead>
+          <tbody>
+            <tr><td>Prywatny przewodnik</td><td><em>„Chcę spędzić sobotę w Krakowie. Uwielbiam historię, ale bolą mnie kolana i unikam schodów. Zaplanuj spokojny spacer na 4 godziny z dwiema klimatycznymi kawiarniami po drodze."</em></td><td>AI ułoży trasę idealnie pod Twoje zdrowie i tempo — pominie strome podejścia, wskaże wygodne kawiarnie i opisze historię mijanych miejsc. Działa tak samo dla każdego miasta w Polsce i za granicą.</td></tr>
+            <tr><td>Prywatny kucharz</td><td><em>„Mam w lodówce tylko cukinię, jedno jajko, resztkę sera żółtego i ryż. Co smacznego mogę z tego zrobić na kolację?"</em></td><td>AI ułoży dokładny przepis krok po kroku z tego, co akurat masz w domu.</td></tr>
+            <tr><td>Błyskawiczny tłumacz</td><td><em>„Moja wnuczka przysłała mi z Londynu pocztówkę: 'I'm having the time of my life here!'. Przetłumacz to i napisz po angielsku odpowiedź: Cieszę się Twoim szczęściem, kochanie!"</em></td><td>AI rozumie emocje i związki frazeologiczne — pozwoli Ci korespondować z rodziną za granicą.</td></tr>
+            <tr><td>Tłumacz rzeczywistości</td><td><em>„Lekarz napisał na skierowaniu 'hipercholesterolemia'. Wyjaśnij mi prostymi słowami, co to oznacza."</em></td><td>Przetłumaczy trudny medyczny lub urzędowy język na zrozumiały, codzienny polski.</td></tr>
+            <tr><td>Rodzinny literat</td><td><em>„Napisz piękne życzenia imieninowe dla mojej przyjaciółki Krystyny, która kocha pracę w ogrodzie i kwiaty."</em></td><td>Otrzymasz gotowy, unikalny tekst, który wystarczy przepisać na kartce.</td></tr>
+            <tr><td>Trener pamięci</td><td><em>„Zagrajmy w kalambury. Ty wymyślasz hasło związane z polskimi filmami z lat 70., a ja będę zgadywać."</em></td><td>Genialny, darmowy trening mózgu i neuroplastyczności bez wychodzenia z domu.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4><span class="em">⚠️</span> Trzy złote zasady bezpiecznego korzystania z AI</h4>
+      <ol class="steps">
+        <li><strong>Zasada ograniczonego zaufania</strong> — komputerowi zdarza się czasem zmyślać z ogromną pewnością siebie (naukowcy nazywają to „halucynacją"). Jeśli pytasz o ważne dawki leków, porady prawne lub godziny odjazdów pociągów, zawsze zweryfikuj odpowiedź w oficjalnym źródle.</li>
+        <li><strong>Dbaj o prywatność</strong> — nigdy nie wpisuj w okno rozmowy z AI swojego numeru PESEL, haseł do banku, dokładnego adresu zamieszkania ani numerów dokumentów.</li>
+        <li><strong>To partner do rozmowy, nie wyrocznia</strong> — traktuj sztuczną inteligencję jak bardzo mądrego, ale czasem roztargnionego pomocnika. Korzystaj z jej pomysłów, ale ostateczne decyzje zawsze podejmuj, opierając się na własnym, bogatym doświadczeniu życiowym.</li>
+      </ol>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>Badania Stanford University nad adaptacją technologiczną seniorów wykazują, że regularne korzystanie z narzędzi konwersacyjnych (takich jak AI) przez osoby starsze drastycznie zmniejsza poczucie wykluczenia cyfrowego i stymuluje płaty czołowe mózgu w stopniu porównywalnym z nauką języka obcego. Raporty MIT (Massachusetts Institute of Technology) podkreślają rolę sztucznej inteligencji jako asystenta poznawczego, który doskonale wspiera pamięć roboczą seniorów w codziennych obowiązkach i organizacji wolnego czasu.</p>
+      </div>
+    </article>
+
+    <div class="back-top"><button onclick="goTo('welcome')">↑ Wróć do strony głównej</button></div>
+  </div>
+</section>
+
+<section class="section" id="relacje">
+  <div class="section-header">
+    <div class="section-header-inner">
+      <div class="stamp-lg">🤝</div>
+      <span class="eyebrow" style="color:var(--gold-bright);">Kategoria: Relacje</span>
+      <h2>Architektura relacji</h2>
+      <p class="deck">Jak mądrze budować sieć wsparcia, stawiać granice i rozmawiać tak, by być usłyszanym — niezależnie od tego, jak wygląda Twoja rodzina.</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <article class="lesson" style="border-bottom:none;">
+      <span class="lesson-tag">Lekcja 1</span>
+      <h3 class="lesson-title">Jak mądrze budować sieć wsparcia i stawiać granice</h3>
+      <p class="subhead">Kluczem nie są więzy krwi, ale jakość i mądrość relacji</p>
+
+      <p>Człowiek jest istotą stadną — tak zaprogramowała nas ewolucja. Nasz mózg rozwijał się w grupach i do dziś potrzebuje innych ludzi do prawidłowego funkcjonowania, tak samo jak potrzebuje tlenu czy wody. Z punktu widzenia neurobiologii samotność jest dla organizmu fizycznym biletem do szybszego starzenia się.</p>
+
+      <p>Twoją siecią wsparcia mogą być dorosłe dzieci, ale z powodzeniem może nią być również oddany przyjaciel, klub sąsiedzki czy grupa znajomych z Uniwersytetu Trzeciego Wieku. <strong>I każdy z tych scenariuszy jest całkowicie normalny.</strong></p>
+
+      <h4><span class="em">🧠</span> Neurobiologia więzi: dlaczego jakość rozmowy ma znaczenie?</h4>
+      <p>Kiedy rozmawiasz z kimś, komu ufasz i przy kim czujesz się bezpiecznie, w Twoim mózgu dzieje się prawdziwa magia. Wydziela się <strong>oksytocyna</strong> (hormon bliskości) oraz <strong>dopamina</strong> (hormon przyjemności), a poziom <strong>kortyzolu</strong> (hormonu stresu) drastycznie spada.</p>
+
+      <div class="fact-box">
+        <span class="tip-label">Co ciekawego odkryła nauka?</span>
+        <p>Dla Twojego mózgu nie ma znaczenia, czy głęboką, serdeczną rozmowę prowadzisz z rodzoną córką, czy z sąsiadką, z którą dzielisz pasję do rozwiązywania krzyżówek. Liczy się poczucie zrozumienia i brak maski.</p>
+      </div>
+
+      <h4><span class="em">🏡</span> Scenariusz A: gdy Twoją codziennością jest rodzina</h4>
+      <p>Posiadanie dużej rodziny to piękna sprawa, ale potrafi też generować spory stres. Jak w tym wszystkim nie zwariować?</p>
+
+      <ul>
+        <li><strong>Szanuj ich autonomię</strong> — słowa „Ja w twoim wieku..." albo „Teraz wychowuje się dzieci zupełnie inaczej" to najprostsza droga do konfliktu. Zamiast dawać nieproszone rady, zapytaj: <em>„Widzę, że macie mnóstwo na głowie. Czy jest coś, w czym mogę Wam pomóc na Waszych zasadach?"</em></li>
+        <li><strong>Asertywność — nie jesteś darmową instytucją</strong> — masz pełne prawo kochać swoje wnuki nad życie, ale masz też prawo być zmęczona. Naucz się mówić: <em>„Bardzo chcę spędzić czas z wnukiem, ale w tę sobotę potrzebuję odpocząć. Zaplanujmy to na przyszły tydzień"</em>. Zdrowe granice budują szacunek.</li>
+      </ul>
+
+      <h4><span class="em">🌿</span> Scenariusz B: gdy Twoją rodziną są przyjaciele i sąsiedzi</h4>
+      <p>Jeśli nie masz dzieci ani małżonka, Twoja sytuacja ma ogromny, często niedoceniany plus: <strong>masz pełną wolność w decydowaniu, kogo wpuszczasz do swojego życia.</strong> Socjologowie nazywają to „rodziną z wyboru".</p>
+
+      <ul>
+        <li><strong>Zainwestuj w mikro-relacje</strong> — codzienna, krótka wymiana zdań z panią w warzywniaku, listonoszem czy sąsiadem stymuluje mózg i daje poczucie przynależności do społeczności.</li>
+        <li><strong>Stwórz „pakt bezpieczeństwa"</strong> — jeśli mieszkasz sam, umów się z zaufaną sąsiadką na prosty sygnał: np. jeśli do godziny 10:00 roleta w oknie jest odsłonięta, to znaczy, że wszystko jest w porządku. To daje poczucie bezpieczeństwa bez naruszania prywatności.</li>
+        <li><strong>Szukaj swoich „plemion"</strong> — lokalne kluby seniora, koła ogrodnicze, biblioteki czy Uniwersytet Trzeciego Wieku to idealne miejsca dla osób szukających bratnich dusz. Nigdy nie jest za późno na znalezienie kogoś, kto śmieje się z tych samych żartów.</li>
+      </ul>
+
+      <h4><span class="em">💬</span> Złota zasada komunikacji: Komunikat typu „JA"</h4>
+      <p>Niezależnie od tego, czy rozmawiasz z synem, przyjaciółką czy sąsiadem, najczęstszym błędem niszczącym relacje jest atakowanie drugiej strony.</p>
+
+      <div class="tip warn">
+        <span class="tip-label">❌ Komunikat typu „TY" (atak)</span>
+        „Nigdy do mnie nie dzwonisz, pamiętasz o mnie tylko, jak czegoś potrzebujesz! Jesteś egoistą."<br>
+        <em>Efekt? Druga osoba natychmiast się obraża lub zaczyna krzyczeć.</em>
+      </div>
+
+      <div class="tip">
+        <span class="tip-label">✅ Komunikat typu „JA" (Twoje uczucia)</span>
+        „Czuję się bardzo samotna i smutna, kiedy przez wiele dni nie mam od Ciebie wiadomości. Tęsknię i chciałabym wiedzieć, co u Ciebie słychać."<br>
+        <em>Efekt? Druga osoba słyszy Twoją potrzebę, a nie oskarżenie. Łatwiej o porozumienie.</em>
+      </div>
+
+      <div class="challenge-box">
+        <span class="tip-label">🧠 Twój dzisiejszy mikro-krok dla zdrowych relacji</span>
+        <p>Wybierz dziś jedną osobę — dziecko, wnuka, dawnego przyjaciela albo sąsiadkę, której rano mówisz tylko „dzień dobry". Zrób jedną z dwóch rzeczy:</p>
+        <div class="pick-list" id="relacjeChallenge">
+          <button type="button" data-c="1">✉️ Wyślij krótkiego, miłego SMS-a: „Pomyślałam dzisiaj o Tobie, mam nadzieję, że masz dobry dzień!"</button>
+          <button type="button" data-c="2">🌱 Zadaj sąsiadowi jedno dodatkowe pytanie: „Widzę, że ma Pan piękny kwiat na balkonie, jak on się nazywa?"</button>
+        </div>
+      </div>
+
+      <div class="sources">
+        <h4>🔬 Badania naukowe, na których się opieramy</h4>
+        <p>The Harvard Study of Adult Development — najdłuższe w historii nauki (ponad 85 lat) badanie nad szczęściem człowieka — udowodniło, że najważniejszym czynnikiem decydującym o dożyciu setki w dobrej formie są <strong>dobre, stabilne relacje z innymi ludźmi</strong>, niezależnie od tego, czy są to partnerzy, dzieci, czy przyjaciele. Badania UCLA nad samotnością wykazują, że chroniczne poczucie osamotnienia ma tak samo destrukcyjny wpływ na długość życia jak palenie 15 papierosów dziennie.</p>
+      </div>
+    </article>
+
+    <div class="back-top"><button onclick="goTo('welcome')">↑ Wróć do strony głównej</button></div>
+  </div>
+</section>
+
+<footer>
+  Jasny Umysł · Barbara Anna Zielonka · Tworzone z troską o Ciebie i Twoich bliskich
+</footer>
+
+<script>
+function goTo(id){
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', t.dataset.target === id ? 'true' : 'false'));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+document.querySelectorAll('.tab, .cat-card').forEach(el => {
+  el.addEventListener('click', () => goTo(el.dataset.target));
+});
+
+// font size controls
+let fsLevel = 0; // -1 = small, 0 = default, 1 = large, 2 = extra large
+function applyFontSize(){
+  document.body.classList.remove('fs-small','fs-2','fs-3');
+  if(fsLevel === -1) document.body.classList.add('fs-small');
+  else if(fsLevel === 1) document.body.classList.add('fs-2');
+  else if(fsLevel === 2) document.body.classList.add('fs-3');
+}
+document.getElementById('fontUp').addEventListener('click', () => {
+  if(fsLevel < 2){ fsLevel++; applyFontSize(); }
+});
+document.getElementById('fontDown').addEventListener('click', () => {
+  if(fsLevel > -1){ fsLevel--; applyFontSize(); }
+});
+
+// daily challenge picker (Umysł)
+document.querySelectorAll('#umyslChallenge button, #relacjeChallenge button').forEach(btn=>{
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#umyslChallenge button').forEach(b=>b.classList.remove('picked'));
+    btn.classList.add('picked');
+  });
+});
+
+// checklist
+document.querySelectorAll('.checklist li').forEach(li=>{
+  const cb = li.querySelector('input');
+  const sync = () => li.classList.toggle('checked', cb.checked);
+  li.addEventListener('click', (e)=>{ if(e.target.tagName!=='INPUT'){ cb.checked = !cb.checked; } sync(); });
+  cb.addEventListener('change', sync);
+});
+
+// quiz
+function quizAnswer(btn, isCorrect, qid){
+  const card = btn.closest('.quiz-card');
+  card.querySelectorAll('button').forEach(b=>b.disabled=true);
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+  const fb = document.getElementById('fb-'+qid);
+  fb.textContent = isCorrect ? '✅ Dokładnie tak! To bezpieczna reakcja.' : '⚠️ Uwaga — to klasyczna pułapka oszustów. Bezpieczniej: rozłącz się lub usuń wiadomość.';
+  fb.style.color = isCorrect ? 'var(--sage-deep)' : 'var(--terracotta)';
+}
+</script>
+</body>
+</html>
